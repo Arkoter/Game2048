@@ -38,7 +38,7 @@ void printColor(int value) {
     }
 }
 
-void printGrid(int grid[SIZE][SIZE]) {
+void printGrid(int **grid) {
     printf("\033[2J\033[H");
 
     printf(COLOR_RESET "\n");
@@ -73,7 +73,7 @@ void printGrid(int grid[SIZE][SIZE]) {
     printf(COLOR_RESET);
 }
 
-void spawnRandomTwo(int grid[SIZE][SIZE]) {
+void spawnRandomTwo(int **grid) {
     int emptyCells[SIZE * SIZE][2];
     int count = 0;
 
@@ -95,7 +95,7 @@ void spawnRandomTwo(int grid[SIZE][SIZE]) {
     }
 }
 
-void slideLeft(int grid[SIZE][SIZE]) {
+void slideLeft(int **grid) {
     for (int i = 0; i < SIZE; i++) {
         int temp[SIZE] = {0};
         int pos = 0;
@@ -129,7 +129,7 @@ void slideLeft(int grid[SIZE][SIZE]) {
     }
 }
 
-void slideRight(int grid[SIZE][SIZE]) {
+void slideRight(int **grid) {
     for (int i = 0; i < SIZE; i++) {
         int temp[SIZE] = {0};
         int pos = SIZE - 1;
@@ -163,7 +163,7 @@ void slideRight(int grid[SIZE][SIZE]) {
     }
 }
 
-void slideUp(int grid[SIZE][SIZE]) {
+void slideUp(int **grid) {
     for (int j = 0; j < SIZE; j++) {
         int temp[SIZE] = {0};
         int pos = 0;
@@ -197,7 +197,7 @@ void slideUp(int grid[SIZE][SIZE]) {
     }
 }
 
-void slideDown(int grid[SIZE][SIZE]) {
+void slideDown(int **grid) {
     for (int j = 0; j < SIZE; j++) {
         int temp[SIZE] = {0};
         int pos = SIZE - 1;
@@ -247,7 +247,12 @@ int main() {
     enableVirtualTerminal();
 #endif
 
-    int grid[SIZE][SIZE];
+    int **grid = (int **)malloc(SIZE * sizeof(int *));
+    if (grid == NULL) return 1;
+    for (int i = 0; i < SIZE; i++) {
+        grid[i] = (int *)malloc(SIZE * sizeof(int));
+        if (grid[i] == NULL) return 1;
+    }
     srand(time(NULL));
 
     for (int i = 0; i < SIZE; i++) {
@@ -297,6 +302,11 @@ int main() {
             break;
         }
     }
+
+    for (int i = 0; i < SIZE; i++) {
+        free(grid[i]);
+    }
+    free(grid);
 
     return 0;
 }
