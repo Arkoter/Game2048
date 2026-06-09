@@ -9,6 +9,8 @@
 
 #define SIZE 4
 
+int score = 0;
+
 
 #define COLOR_RESET "\033[0m"
 #define BORDER_COLOR "\033[38;5;240m"
@@ -67,6 +69,7 @@ void printGrid(int grid[SIZE][SIZE]) {
         }
         printf("\n    +------+------+------+------+\n");
     }
+    printf("\n      \033[38;5;214mSCORE: \033[1m%d\033[0m\n\n", score);
     printf(COLOR_RESET);
 }
 
@@ -108,6 +111,7 @@ void slideLeft(int grid[SIZE][SIZE]) {
         for (int j = 0; j < SIZE - 1; j++) {
             if (grid[i][j] != 0 && grid[i][j] == grid[i][j + 1]) {
                 grid[i][j] *= 2;
+                score += grid[i][j];
                 grid[i][j + 1] = 0;
             }
         }
@@ -141,6 +145,7 @@ void slideRight(int grid[SIZE][SIZE]) {
         for (int j = SIZE - 1; j > 0; j--) {
             if (grid[i][j] != 0 && grid[i][j] == grid[i][j - 1]) {
                 grid[i][j] *= 2;
+                score += grid[i][j];
                 grid[i][j - 1] = 0;
             }
         }
@@ -174,6 +179,7 @@ void slideUp(int grid[SIZE][SIZE]) {
         for (int i = 0; i < SIZE - 1; i++) {
             if (grid[i][j] != 0 && grid[i][j] == grid[i + 1][j]) {
                 grid[i][j] *= 2;
+                score += grid[i][j];
                 grid[i + 1][j] = 0;
             }
         }
@@ -207,6 +213,7 @@ void slideDown(int grid[SIZE][SIZE]) {
         for (int i = SIZE - 1; i > 0; i--) {
             if (grid[i][j] != 0 && grid[i][j] == grid[i - 1][j]) {
                 grid[i][j] *= 2;
+                score += grid[i][j];
                 grid[i - 1][j] = 0;
             }
         }
