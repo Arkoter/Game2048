@@ -104,6 +104,24 @@ void slideLeft(int grid[SIZE][SIZE]) {
         for (int j = 0; j < SIZE; j++) {
             grid[i][j] = temp[j];
         }
+
+        for (int j = 0; j < SIZE - 1; j++) {
+            if (grid[i][j] != 0 && grid[i][j] == grid[i][j + 1]) {
+                grid[i][j] *= 2;
+                grid[i][j + 1] = 0;
+            }
+        }
+
+        int temp2[SIZE] = {0};
+        pos = 0;
+        for (int j = 0; j < SIZE; j++) {
+            if (grid[i][j] != 0) {
+                temp2[pos++] = grid[i][j];
+            }
+        }
+        for (int j = 0; j < SIZE; j++) {
+            grid[i][j] = temp2[j];
+        }
     }
 }
 
@@ -118,6 +136,24 @@ void slideRight(int grid[SIZE][SIZE]) {
         }
         for (int j = 0; j < SIZE; j++) {
             grid[i][j] = temp[j];
+        }
+
+        for (int j = SIZE - 1; j > 0; j--) {
+            if (grid[i][j] != 0 && grid[i][j] == grid[i][j - 1]) {
+                grid[i][j] *= 2;
+                grid[i][j - 1] = 0;
+            }
+        }
+
+        int temp2[SIZE] = {0};
+        pos = SIZE - 1;
+        for (int j = SIZE - 1; j >= 0; j--) {
+            if (grid[i][j] != 0) {
+                temp2[pos--] = grid[i][j];
+            }
+        }
+        for (int j = 0; j < SIZE; j++) {
+            grid[i][j] = temp2[j];
         }
     }
 }
@@ -134,6 +170,24 @@ void slideUp(int grid[SIZE][SIZE]) {
         for (int i = 0; i < SIZE; i++) {
             grid[i][j] = temp[i];
         }
+
+        for (int i = 0; i < SIZE - 1; i++) {
+            if (grid[i][j] != 0 && grid[i][j] == grid[i + 1][j]) {
+                grid[i][j] *= 2;
+                grid[i + 1][j] = 0;
+            }
+        }
+
+        int temp2[SIZE] = {0};
+        pos = 0;
+        for (int i = 0; i < SIZE; i++) {
+            if (grid[i][j] != 0) {
+                temp2[pos++] = grid[i][j];
+            }
+        }
+        for (int i = 0; i < SIZE; i++) {
+            grid[i][j] = temp2[i];
+        }
     }
 }
 
@@ -148,6 +202,24 @@ void slideDown(int grid[SIZE][SIZE]) {
         }
         for (int i = 0; i < SIZE; i++) {
             grid[i][j] = temp[i];
+        }
+
+        for (int i = SIZE - 1; i > 0; i--) {
+            if (grid[i][j] != 0 && grid[i][j] == grid[i - 1][j]) {
+                grid[i][j] *= 2;
+                grid[i - 1][j] = 0;
+            }
+        }
+
+        int temp2[SIZE] = {0};
+        pos = SIZE - 1;
+        for (int i = SIZE - 1; i >= 0; i--) {
+            if (grid[i][j] != 0) {
+                temp2[pos--] = grid[i][j];
+            }
+        }
+        for (int i = 0; i < SIZE; i++) {
+            grid[i][j] = temp2[i];
         }
     }
 }
