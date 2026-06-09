@@ -261,16 +261,38 @@ int main() {
 
     while (1) {
         printGrid(grid);
-        
+
         int key = _getch();
         if (key == 224) {
             key = _getch();
+            
+            int backup[SIZE][SIZE];
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    backup[i][j] = grid[i][j];
+                }
+            }
+
             switch (key) {
                 case 72: slideUp(grid); break;
                 case 80: slideDown(grid); break;
                 case 75: slideLeft(grid); break;
                 case 77: slideRight(grid); break;
             }
+
+            int changed = 0;
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    if (backup[i][j] != grid[i][j]) {
+                        changed = 1;
+                    }
+                }
+            }
+
+            if (changed) {
+                spawnRandomTwo(grid);
+            }
+
         } else if (key == 'q' || key == 'Q') {
             break;
         }
